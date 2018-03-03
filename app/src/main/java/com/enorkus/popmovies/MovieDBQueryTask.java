@@ -3,16 +3,25 @@ package com.enorkus.popmovies;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
+import com.enorkus.popmovies.entity.Movie;
+import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
-public class MovieDBQueryTask extends AsyncTask<URL, Void, String>{
-    private TextView rootView;
+public class MovieDBQueryTask extends AsyncTask<URL, Void, String> {
+    public AsyncResponse output;
 
-    public MovieDBQueryTask(TextView rootView) {
-        this.rootView = rootView;
+    public MovieDBQueryTask(AsyncResponse output) {
+        this.output = output;
     }
 
     @Override
@@ -25,9 +34,15 @@ public class MovieDBQueryTask extends AsyncTask<URL, Void, String>{
         return null;
     }
 
-    @Override
-    protected void onPostExecute(String s) {
-        rootView.setText(s);
-        super.onPostExecute(s);
+    protected void onPostExecute(String response) {
+        try {
+            JSONObject results = new JSONObject(response);
+            JSONArray resultsArray = results.getJSONArray("results");
+            Movie[] movieArray = new Gson().fromJson(resultsArray.toString(), Movie[].class);
+            List<Movie> movies = Arrays.asList(movieArray);
+            output.getAsyncResponseOnFinish(movies);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.enorkus.popmovies.util;
 
 import android.net.Uri;
 
+import com.enorkus.popmovies.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;

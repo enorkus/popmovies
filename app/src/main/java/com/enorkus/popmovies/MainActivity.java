@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.enorkus.popmovies.entity.Movie;
+import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
 
 import java.io.IOException;
@@ -17,8 +19,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        new MovieDBQueryTask((TextView)findViewById(R.id.responseTV)).execute(ConnectionUtils.buildPopularMoviesURL());
+        MovieDBQueryTask queryTask = new MovieDBQueryTask(this);
+        queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
     }
 
     @Override
@@ -44,5 +48,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void getAsyncResponseOnFinish(List<Movie> response) {
+        TextView testTV = (TextView)findViewById(R.id.responseTV);
+        testTV.setText(response.get(0).getOverview());
     }
 }
