@@ -8,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
+import com.enorkus.popmovies.util.MovieAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     public void getAsyncResponseOnFinish(List<Movie> response) {
-        TextView testTV = (TextView)findViewById(R.id.responseTV);
-        testTV.setText(response.get(0).getOverview());
+        MovieAdapter adapter = new MovieAdapter(this, response);
+        GridView gridView = findViewById(R.id.moviesGV);
+        gridView.setAdapter(adapter);
     }
 }
