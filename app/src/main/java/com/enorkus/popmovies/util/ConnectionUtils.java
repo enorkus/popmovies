@@ -20,20 +20,16 @@ public class ConnectionUtils {
     private static final String ENDPOINT_TOP_RATED = "top_rated";
 
     public static URL buildTopRatedMoviesURL() {
-        Uri uri = Uri.parse(MOVIE_DB_BASE_ULR).buildUpon()
-                .appendPath(ENDPOINT_TOP_RATED)
-                .appendQueryParameter(PARAM_API_KEY, MOVIE_DB_API_KEY).build();
-        try {
-            return new URL(uri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return buildMoviesDBURL(ENDPOINT_TOP_RATED);
     }
 
     public static URL buildPopularMoviesURL() {
+        return buildMoviesDBURL(ENDPOINT_POPULAR);
+    }
+
+    private static URL buildMoviesDBURL(String endpoint) {
         Uri uri = Uri.parse(MOVIE_DB_BASE_ULR).buildUpon()
-                .appendPath(ENDPOINT_POPULAR)
+                .appendPath(endpoint)
                 .appendQueryParameter(PARAM_API_KEY, MOVIE_DB_API_KEY).build();
         try {
             return new URL(uri.toString());
