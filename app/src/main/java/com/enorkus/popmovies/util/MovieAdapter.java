@@ -1,9 +1,6 @@
 package com.enorkus.popmovies.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,14 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.entity.Movie;
+import com.enorkus.popmovies.listener.PosterOnClickListener;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -37,8 +31,13 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_movie, parent, false);
         }
 
-        ImageView poster = (ImageView) convertView.findViewById(R.id.moviePoster);
-        Picasso.with(getContext()).load(ConnectionUtils.buildMoviePosterUrl(movie.getPoster())).into(poster);
+        ImageView IVmoviePosterItem = convertView.findViewById(R.id.IVmoviePosterItem);
+        IVmoviePosterItem.setOnClickListener(new PosterOnClickListener(movie));
+        Picasso.with(getContext())
+                .load(ConnectionUtils.buildMoviePosterUrl(movie.getPoster()))
+                .placeholder(R.drawable.movie_poster_placeholder)
+                .error(R.drawable.movie_poster_error)
+                .into(IVmoviePosterItem);
         return convertView;
     }
 }

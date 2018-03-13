@@ -14,7 +14,15 @@ import com.enorkus.popmovies.util.MovieAdapter;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
+
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
+    @BindView(R.id.GVmoviePosters)
+    protected GridView GVmoviePosters;
 
     private MovieDBQueryTask queryTask;
     //booleans to avoid querying API when sorting selection is same as current.
@@ -25,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         queryTask = new MovieDBQueryTask(this);
         queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
@@ -64,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     @Override
     public void getAsyncResponseOnFinish(List<Movie> response) {
         MovieAdapter adapter = new MovieAdapter(this, response);
-        GridView gridView = findViewById(R.id.moviesGV);
-        gridView.setAdapter(adapter);
+        GVmoviePosters.setAdapter(adapter);
     }
 }

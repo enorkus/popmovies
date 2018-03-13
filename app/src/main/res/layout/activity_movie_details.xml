@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    tools:context="com.enorkus.popmovies.MovieDetailsActivity">
+
+    <ImageView
+        android:id="@+id/IVmoviePoster"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:ignore="Suspicious0dp"
+        android:layout_weight="1"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TVmovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textLarge"
+            android:paddingLeft="@dimen/padding10dp"
+            android:paddingTop="@dimen/padding10dp"
+            android:textColor="@color/textPrimary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding10dp"
+                android:textSize="@dimen/textSmall"
+                android:text="@string/release_date_label"
+                android:textColor="@color/textPrimary"/>
+            <TextView
+                android:id="@+id/TVreleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSmall"
+                android:textColor="@color/textPrimary"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding10dp"
+                android:textSize="@dimen/textSmall"
+                android:text="@string/rating_label"
+                android:textColor="@color/textPrimary"/>
+            <TextView
+                android:id="@+id/TVrating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSmall"
+                android:textColor="@color/textPrimary"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TVOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSmall"
+            android:paddingLeft="@dimen/padding10dp"
+            android:paddingTop="@dimen/padding10dp"
+            android:textColor="@color/textPrimary"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -2,7 +2,7 @@ package com.enorkus.popmovies.util;
 
 import android.net.Uri;
 
-import com.enorkus.popmovies.R;
+import com.enorkus.popmovies.BuildConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,12 +12,12 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class ConnectionUtils {
-    private static final String MOVIE_DB_API_KEY = "SECRET";
-    private static final String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185";
+    private static final String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w342";
     private static final String MOVIE_DB_BASE_ULR = "http://api.themoviedb.org/3/movie/";
     private static final String PARAM_API_KEY = "api_key";
     private static final String ENDPOINT_POPULAR = "popular";
     private static final String ENDPOINT_TOP_RATED = "top_rated";
+    private static final String JSON_STREAM_DELIMITER = "\\A";
 
     public static URL buildTopRatedMoviesURL() {
         return buildMoviesDBURL(ENDPOINT_TOP_RATED);
@@ -30,7 +30,7 @@ public class ConnectionUtils {
     private static URL buildMoviesDBURL(String endpoint) {
         Uri uri = Uri.parse(MOVIE_DB_BASE_ULR).buildUpon()
                 .appendPath(endpoint)
-                .appendQueryParameter(PARAM_API_KEY, MOVIE_DB_API_KEY).build();
+                .appendQueryParameter(PARAM_API_KEY, BuildConfig.TheMovieDBAPIKey).build();
         try {
             return new URL(uri.toString());
         } catch (MalformedURLException e) {
@@ -48,7 +48,7 @@ public class ConnectionUtils {
         try {
             InputStream stream = connection.getInputStream();
             Scanner scan = new Scanner(stream);
-            scan.useDelimiter("\\A");
+            scan.useDelimiter(JSON_STREAM_DELIMITER);
             if (scan.hasNext()) {
                 return scan.next();
             }

@@ -1,7 +1,6 @@
 package com.enorkus.popmovies;
 
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.util.AsyncResponse;
@@ -18,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MovieDBQueryTask extends AsyncTask<URL, Void, String> {
-    public AsyncResponse output;
+    private final AsyncResponse output;
 
     public MovieDBQueryTask(AsyncResponse output) {
         this.output = output;
