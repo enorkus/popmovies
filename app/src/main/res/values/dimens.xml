@@ -1,6 +1,5 @@
 <resources>
     <dimen name="textLarge">25sp</dimen>
     <dimen name="textSmall">12sp</dimen>
-    <dimen name="padding10dp">10dp</dimen>
-    <dimen name="height0dp">0dp</dimen>
+    <item name="guideline40perc" type="dimen" format="float">0.4</item>
 </resources>
