@@ -17,6 +17,8 @@ public class ConnectionUtils {
     private static final String PARAM_API_KEY = "api_key";
     private static final String ENDPOINT_POPULAR = "popular";
     private static final String ENDPOINT_TOP_RATED = "top_rated";
+    private static final String ENDPOINT_VIDEOS = "videos";
+    private static final String ENDPOINT_REVIEWS = "reviews";
     private static final String JSON_STREAM_DELIMITER = "\\A";
 
     public static URL buildTopRatedMoviesURL() {
@@ -25,6 +27,31 @@ public class ConnectionUtils {
 
     public static URL buildPopularMoviesURL() {
         return buildMoviesDBURL(ENDPOINT_POPULAR);
+    }
+
+    public static String buildMoviePosterUrl(String imageName) {
+        return MOVIE_DB_IMAGE_BASE_URL + imageName;
+    }
+
+    public static URL buildMovieVideosURL(String id) {
+        return buildMoviesDBURL(id, ENDPOINT_VIDEOS);
+    }
+
+    public static URL buildMovieReviewsURL(String id) {
+        return buildMoviesDBURL(id, ENDPOINT_REVIEWS);
+    }
+
+    private static URL buildMoviesDBURL(String id, String endpoint) {
+        Uri uri = Uri.parse(MOVIE_DB_BASE_ULR).buildUpon()
+                .appendPath(id)
+                .appendPath(endpoint)
+                .appendQueryParameter(PARAM_API_KEY, BuildConfig.TheMovieDBAPIKey).build();
+        try {
+            return new URL(uri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static URL buildMoviesDBURL(String endpoint) {
@@ -37,10 +64,6 @@ public class ConnectionUtils {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static String buildMoviePosterUrl(String imageName) {
-        return MOVIE_DB_IMAGE_BASE_URL + imageName;
     }
 
     public static String getResponse(URL url) throws IOException {
