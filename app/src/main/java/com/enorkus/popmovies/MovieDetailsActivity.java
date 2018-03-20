@@ -1,11 +1,13 @@
 package com.enorkus.popmovies;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.enorkus.popmovies.entity.Movie;
+import com.enorkus.popmovies.listener.FavoriteOnClickListener;
 import com.enorkus.popmovies.util.ConnectionUtils;
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +28,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     protected TextView TVrating;
     @BindView(R.id.TVOverview)
     protected TextView TVoverview;
+    @BindView(R.id.fabFavorite)
+    protected FloatingActionButton fabFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +48,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         TVreleaseDate.setText(movie.getReleaseDate());
         TVrating.setText(movie.getVoteAverage());
         TVoverview.setText(movie.getOverview());
+
+        fabFavorite.setOnClickListener(new FavoriteOnClickListener(movie));
     }
 }

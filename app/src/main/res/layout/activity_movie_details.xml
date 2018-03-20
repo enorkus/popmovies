@@ -105,5 +105,19 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="@dimen/guideline40perc" />
 
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/IVmoviePoster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/posterGuideline"
+            app:srcCompat="@drawable/fav_star_off" />
+
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

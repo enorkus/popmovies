@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable{
+public class Movie implements Serializable {
+    private int id;
     private String title;
     @SerializedName("release_date")
     private String releaseDate;
@@ -53,4 +54,8 @@ public class Movie implements Serializable{
     public void setOverview(String overview) {
         this.overview = overview;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 }
