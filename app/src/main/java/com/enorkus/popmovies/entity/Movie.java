@@ -15,6 +15,15 @@ public class Movie implements Serializable {
     private String voteAverage;
     private String overview;
 
+    public Movie(int id, String title, String releaseDate, String poster, String voteAverage, String overview) {
+        this.id = id;
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.poster = poster;
+        this.voteAverage = voteAverage;
+        this.overview = overview;
+    }
+
     public String getTitle() {
         return title;
     }

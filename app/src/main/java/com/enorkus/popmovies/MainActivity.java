@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     //booleans to avoid querying API when sorting selection is same as current.
     private boolean isSortedByPopular;
     private boolean isSortedByRating;
+    private boolean isFavoriteMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         queryTask = new MovieDBQueryTask(this);
         queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
         isSortedByPopular = true;
-    }
-
-    private Cursor getAllMovies() {
-        return db.query(MovieEntry.TABLE_NAME, null, null, null, null, null, MovieEntry.COLUMN_ID);
     }
 
     @Override
@@ -67,12 +64,22 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
             isSortedByRating = false;
             isSortedByPopular = true;
+            isFavoriteMovies = false;
             return true;
         } else if(id == R.id.menuSortRating && !isSortedByRating) {
             queryTask = new MovieDBQueryTask(this);
             queryTask.execute(ConnectionUtils.buildTopRatedMoviesURL());
-            isSortedByPopular = false;
             isSortedByRating = true;
+            isSortedByPopular = false;
+            isFavoriteMovies = false;
+            return true;
+        } else if(id == R.id.menuFavorites && !isFavoriteMovies) {
+            MoviesDBHelper db = new MoviesDBHelper(this);
+            MovieAdapter adapter = new MovieAdapter(this, db.fetchAllFavoriteMovies());
+            GVmoviePosters.setAdapter(adapter);
+            isSortedByRating = false;
+            isSortedByPopular = false;
+            isFavoriteMovies = true;
             return true;
         }
         return super.onOptionsItemSelected(item);

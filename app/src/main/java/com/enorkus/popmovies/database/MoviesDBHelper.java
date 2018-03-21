@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.enorkus.popmovies.entity.Movie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MoviesDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "movies.db";
@@ -65,5 +68,27 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
             db.close();
         }
         return false;
+    }
+
+    public List<Movie> fetchAllFavoriteMovies() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Movie> movies = new ArrayList<>();
+        Cursor cursor = db.query(MovieEntry.TABLE_NAME, null, null, null, null, null, null);
+        try {
+            for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(MovieEntry.COLUMN_ID));
+                String poster = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_POSTER));
+                String title = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_TITLE));
+                String overview = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_OVERVIEW));
+                String releaseDate = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_RELEASE_DATE));
+                String voteAverage = cursor.getString(cursor.getColumnIndex(MovieEntry.COLUMN_VOTE_AVERAGE));
+                movies.add(new Movie(id, title, releaseDate, poster, voteAverage, overview));
+            }
+
+        } finally {
+            cursor.close();
+            db.close();
+        }
+        return movies;
     }
 }
