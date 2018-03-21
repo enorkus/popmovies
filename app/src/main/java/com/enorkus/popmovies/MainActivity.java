@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.enorkus.popmovies.database.MockDataProvider;
 import com.enorkus.popmovies.database.MovieEntry;
 import com.enorkus.popmovies.database.MoviesDBHelper;
 import com.enorkus.popmovies.entity.Movie;
@@ -44,21 +43,10 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         queryTask = new MovieDBQueryTask(this);
         queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
         isSortedByPopular = true;
-
-        MoviesDBHelper dbHelper = new MoviesDBHelper(this);
-        db = dbHelper.getWritableDatabase();
-
-//        MockDataProvider.insertFakeData(db);
-//
-//        Cursor cr = getAllMovies();
-//        cr.move(4);
-//        cr.getString(cr.getColumnIndex(MovieEntry.COLUMN_OVERVIEW));
-//        cr.getString(cr.getColumnIndex(MovieEntry.COLUMN_POSTER));
-
     }
 
     private Cursor getAllMovies() {
-        return db.query(MovieEntry.TABLE_NAME, null, null, null, null, null, MovieEntry.COLUMN_MOVIE_ID);
+        return db.query(MovieEntry.TABLE_NAME, null, null, null, null, null, MovieEntry.COLUMN_ID);
     }
 
     @Override

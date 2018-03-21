@@ -11,7 +11,7 @@ import com.enorkus.popmovies.entity.Movie;
 public class MoviesDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "movies.db";
-    private static final int version = 2;
+    private static final int version = 3;
 
     public MoviesDBHelper(Context context) {
         super(context, DB_NAME, null, version);
@@ -19,7 +19,7 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_FAVORITE_MOVIES_TABLE = "CREATE TABLE " + MovieEntry.TABLE_NAME + " (" + MovieEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + MovieEntry.COLUMN_MOVIE_ID + " INTEGER NOT NULL, " +
+        final String SQL_CREATE_FAVORITE_MOVIES_TABLE = "CREATE TABLE " + MovieEntry.TABLE_NAME + " (" + MovieEntry.COLUMN_ID + " INTEGER PRIMARY KEY NOT NULL, " +
                 MovieEntry.COLUMN_TITLE + " TEXT NOT NULL, " + MovieEntry.COLUMN_RELEASE_DATE + " TEXT NOT NULL, " + MovieEntry.COLUMN_POSTER + " TEXT NOT NULL, " + MovieEntry.COLUMN_VOTE_AVERAGE + " TEXT NOT NULL, "
                 + MovieEntry.COLUMN_OVERVIEW + " TEXT NOT NULL" + ");";
         sqLiteDatabase.execSQL(SQL_CREATE_FAVORITE_MOVIES_TABLE);
@@ -32,20 +32,38 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
     }
 
     public void saveMovie(Movie movie) {
-        getWritableDatabase().delete(MovieEntry.TABLE_NAME, null, null);
-
+        SQLiteDatabase db = getReadableDatabase();
         ContentValues movieCV = new ContentValues();
-        movieCV.put(MovieEntry.COLUMN_MOVIE_ID, movie.getId());
+        movieCV.put(MovieEntry.COLUMN_ID, movie.getId());
         movieCV.put(MovieEntry.COLUMN_POSTER, movie.getPoster());
         movieCV.put(MovieEntry.COLUMN_TITLE, movie.getTitle());
         movieCV.put(MovieEntry.COLUMN_RELEASE_DATE, movie.getReleaseDate());
         movieCV.put(MovieEntry.COLUMN_VOTE_AVERAGE, movie.getVoteAverage());
         movieCV.put(MovieEntry.COLUMN_OVERVIEW, movie.getOverview());
-        getWritableDatabase().insert(MovieEntry.TABLE_NAME, null, movieCV);
+        db.insert(MovieEntry.TABLE_NAME, null, movieCV);
+        db.close();
+    }
 
-        Cursor cr = getWritableDatabase().query(MovieEntry.TABLE_NAME, null, null, null, null, null, MovieEntry.COLUMN_MOVIE_ID);
-        cr.move(1);
-        String title = cr.getString(cr.getColumnIndex(MovieEntry.COLUMN_TITLE));
-        String poster = cr.getString(cr.getColumnIndex(MovieEntry.COLUMN_POSTER));
+    public void deleteMovie(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        String whereClause = MovieEntry.COLUMN_ID + "=?";
+        String[] idArg = {String.valueOf(id)};
+        db.delete(MovieEntry.TABLE_NAME, whereClause, idArg);
+        db.close();
+    }
+
+    public boolean favoriteMovieExists(int id) {
+        String[] idArg = {String.valueOf(id)};
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + MovieEntry.TABLE_NAME + " WHERE " + MovieEntry.COLUMN_ID + "=?", idArg);
+        try {
+            if(cursor.getCount() != 0) {
+                return true;
+            }
+        } finally {
+            cursor.close();
+            db.close();
+        }
+        return false;
     }
 }

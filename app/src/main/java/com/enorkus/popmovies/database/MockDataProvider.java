@@ -17,7 +17,7 @@ public class MockDataProvider {
         List<ContentValues> list = new ArrayList<ContentValues>();
 
         ContentValues cv = new ContentValues();
-        cv.put(MovieEntry.COLUMN_MOVIE_ID, 10);
+        cv.put(MovieEntry.COLUMN_ID, 10);
         cv.put(MovieEntry.COLUMN_POSTER, "poster1");
         cv.put(MovieEntry.COLUMN_TITLE, "poster1");
         cv.put(MovieEntry.COLUMN_RELEASE_DATE, "poster1");
@@ -26,7 +26,7 @@ public class MockDataProvider {
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(MovieEntry.COLUMN_MOVIE_ID, 20);
+        cv.put(MovieEntry.COLUMN_ID, 20);
         cv.put(MovieEntry.COLUMN_POSTER, "poster2");
         cv.put(MovieEntry.COLUMN_TITLE, "poster2");
         cv.put(MovieEntry.COLUMN_RELEASE_DATE, "poster2");
@@ -35,7 +35,7 @@ public class MockDataProvider {
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(MovieEntry.COLUMN_MOVIE_ID, 30);
+        cv.put(MovieEntry.COLUMN_ID, 30);
         cv.put(MovieEntry.COLUMN_POSTER, "poster3");
         cv.put(MovieEntry.COLUMN_TITLE, "poster3");
         cv.put(MovieEntry.COLUMN_RELEASE_DATE, "poster3");
@@ -44,7 +44,7 @@ public class MockDataProvider {
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(MovieEntry.COLUMN_MOVIE_ID, 40);
+        cv.put(MovieEntry.COLUMN_ID, 40);
         cv.put(MovieEntry.COLUMN_POSTER, "poster4");
         cv.put(MovieEntry.COLUMN_TITLE, "poster4");
         cv.put(MovieEntry.COLUMN_RELEASE_DATE, "poster4");
@@ -53,7 +53,7 @@ public class MockDataProvider {
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(MovieEntry.COLUMN_MOVIE_ID, 50);
+        cv.put(MovieEntry.COLUMN_ID, 50);
         cv.put(MovieEntry.COLUMN_POSTER, "poster5");
         cv.put(MovieEntry.COLUMN_TITLE, "poster5");
         cv.put(MovieEntry.COLUMN_RELEASE_DATE, "poster5");

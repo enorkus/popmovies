@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.enorkus.popmovies.database.MoviesDBHelper;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.listener.FavoriteOnClickListener;
 import com.enorkus.popmovies.util.ConnectionUtils;
@@ -49,6 +50,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
         TVrating.setText(movie.getVoteAverage());
         TVoverview.setText(movie.getOverview());
 
-        fabFavorite.setOnClickListener(new FavoriteOnClickListener(movie));
+        fabFavorite.setOnClickListener(new FavoriteOnClickListener(movie, fabFavorite));
+        toggleFavoriteFAB(movie.getId());
+    }
+
+    private void toggleFavoriteFAB(int id) {
+        MoviesDBHelper dbHelper = new MoviesDBHelper(this);
+        if(dbHelper.favoriteMovieExists(id)) {
+            fabFavorite.setImageResource(R.drawable.fav_star_on_yell);
+        }
     }
 }
