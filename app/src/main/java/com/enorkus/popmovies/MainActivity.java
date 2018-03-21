@@ -1,6 +1,5 @@
 package com.enorkus.popmovies;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.enorkus.popmovies.database.MovieEntry;
 import com.enorkus.popmovies.database.MoviesDBHelper;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.util.AsyncResponse;

@@ -11,6 +11,8 @@ import com.enorkus.popmovies.entity.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.enorkus.popmovies.database.MovieContract.*;
+
 public class MoviesDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "movies.db";
@@ -32,19 +34,6 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MovieEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
-    }
-
-    public void saveMovie(Movie movie) {
-        SQLiteDatabase db = getReadableDatabase();
-        ContentValues movieCV = new ContentValues();
-        movieCV.put(MovieEntry.COLUMN_ID, movie.getId());
-        movieCV.put(MovieEntry.COLUMN_POSTER, movie.getPoster());
-        movieCV.put(MovieEntry.COLUMN_TITLE, movie.getTitle());
-        movieCV.put(MovieEntry.COLUMN_RELEASE_DATE, movie.getReleaseDate());
-        movieCV.put(MovieEntry.COLUMN_VOTE_AVERAGE, movie.getVoteAverage());
-        movieCV.put(MovieEntry.COLUMN_OVERVIEW, movie.getOverview());
-        db.insert(MovieEntry.TABLE_NAME, null, movieCV);
-        db.close();
     }
 
     public void deleteMovie(int id) {
