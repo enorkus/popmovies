@@ -1,4 +1,4 @@
-package com.enorkus.popmovies.database;
+package com.enorkus.popmovies.data;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

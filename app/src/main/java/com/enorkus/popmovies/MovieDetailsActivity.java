@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.enorkus.popmovies.database.MoviesDBHelper;
+import com.enorkus.popmovies.data.MoviesContentProviderHelper;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.listener.FavoriteOnClickListener;
 import com.enorkus.popmovies.util.ConnectionUtils;
@@ -55,8 +55,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     private void toggleFavoriteFAB(int id) {
-        MoviesDBHelper dbHelper = new MoviesDBHelper(this);
-        if(dbHelper.favoriteMovieExists(id)) {
+        MoviesContentProviderHelper contentHelper = new MoviesContentProviderHelper(this);
+        if(contentHelper.isAlreadyFavoriteMovie(id)) {
             fabFavorite.setImageResource(R.drawable.fav_star_on_yell);
         }
     }

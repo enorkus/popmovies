@@ -8,7 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.enorkus.popmovies.database.MoviesDBHelper;
+import com.enorkus.popmovies.data.MoviesContentProviderHelper;
+import com.enorkus.popmovies.data.MoviesDBHelper;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             isFavoriteMovies = false;
             return true;
         } else if(id == R.id.menuFavorites && !isFavoriteMovies) {
-            MoviesDBHelper db = new MoviesDBHelper(this);
-            MovieAdapter adapter = new MovieAdapter(this, db.fetchAllFavoriteMovies());
+            MoviesContentProviderHelper contentHelper = new MoviesContentProviderHelper(this);
+            MovieAdapter adapter = new MovieAdapter(this, contentHelper.fetchAllFavoriteMovies());
             GVmoviePosters.setAdapter(adapter);
             isSortedByRating = false;
             isSortedByPopular = false;
