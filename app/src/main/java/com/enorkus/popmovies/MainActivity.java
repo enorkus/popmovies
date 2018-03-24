@@ -2,15 +2,17 @@ package com.enorkus.popmovies;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
 import com.enorkus.popmovies.data.MoviesContentProviderHelper;
-import com.enorkus.popmovies.data.MoviesDBHelper;
 import com.enorkus.popmovies.entity.Movie;
+import com.enorkus.popmovies.listener.BottomNavigationItemSelectListener;
+import com.enorkus.popmovies.ui.BottomNavigationViewBehavior;
 import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
 import com.enorkus.popmovies.util.MovieAdapter;
@@ -22,27 +24,25 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
-    @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+//    @BindView(R.id.bottomNavigation)
+//    protected BottomNavigationView bottomNavigation;
     @BindView(R.id.GVmoviePosters)
     protected GridView GVmoviePosters;
 
     private MovieDBQueryTask queryTask;
-    private SQLiteDatabase db;
-    //booleans to avoid querying API when sorting selection is same as current.
-    private boolean isSortedByPopular;
-    private boolean isSortedByRating;
-    private boolean isFavoriteMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
         queryTask = new MovieDBQueryTask(this);
         queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
-        isSortedByPopular = true;
+
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomNavigation.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationViewBehavior());
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationItemSelectListener(this, GVmoviePosters));
     }
 
     @Override
@@ -50,38 +50,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.sort_by) {
-            return true;
-        } else if(id == R.id.menuSortPopular && !isSortedByPopular) {
-            queryTask = new MovieDBQueryTask(this);
-            queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
-            isSortedByRating = false;
-            isSortedByPopular = true;
-            isFavoriteMovies = false;
-            return true;
-        } else if(id == R.id.menuSortRating && !isSortedByRating) {
-            queryTask = new MovieDBQueryTask(this);
-            queryTask.execute(ConnectionUtils.buildTopRatedMoviesURL());
-            isSortedByRating = true;
-            isSortedByPopular = false;
-            isFavoriteMovies = false;
-            return true;
-        } else if(id == R.id.menuFavorites && !isFavoriteMovies) {
-            MoviesContentProviderHelper contentHelper = new MoviesContentProviderHelper(this);
-            MovieAdapter adapter = new MovieAdapter(this, contentHelper.fetchAllFavoriteMovies());
-            GVmoviePosters.setAdapter(adapter);
-            isSortedByRating = false;
-            isSortedByPopular = false;
-            isFavoriteMovies = true;
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

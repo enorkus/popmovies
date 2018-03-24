@@ -57,7 +57,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private void toggleFavoriteFAB(int id) {
         MoviesContentProviderHelper contentHelper = new MoviesContentProviderHelper(this);
         if(contentHelper.isAlreadyFavoriteMovie(id)) {
-            fabFavorite.setImageResource(R.drawable.fav_star_on_yell);
+            fabFavorite.setImageResource(R.drawable.ic_favorite_white_48dp);
         }
     }
 }

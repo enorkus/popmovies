@@ -1,22 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.enorkus.popmovies.MainActivity">
     <item
-        android:id="@+id/sort_by"
-        android:orderInCategory="100"
-        android:title="@string/sort_by"
-        app:showAsAction="always">
-        <menu>
-            <item
-                android:id="@+id/menuSortPopular"
-                android:title="@string/sort_popular" />
-            <item
-                android:id="@+id/menuSortRating"
-                android:title="@string/sort_rating" />
-            <item
-                android:id="@+id/menuFavorites"
-                android:title="@string/sort_favorite" />
-        </menu>
-    </item>
+        android:id="@+id/menuSortPopular"
+        android:icon="@drawable/ic_whatshot_white_48dp"
+        android:title="@string/sort_popular" />
+    <item
+        android:id="@+id/menuSortRating"
+        android:icon="@drawable/ic_grade_white_48dp"
+        android:title="@string/sort_rating" />
+    <item
+        android:id="@+id/menuFavorites"
+        android:icon="@drawable/ic_favorite_white_48dp"
+        android:title="@string/sort_favorite" />
 </menu>
