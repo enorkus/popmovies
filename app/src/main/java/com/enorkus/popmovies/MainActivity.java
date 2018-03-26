@@ -1,21 +1,20 @@
 package com.enorkus.popmovies;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.enorkus.popmovies.data.MoviesContentProviderHelper;
+import com.enorkus.popmovies.asynctask.MovieDBQueryTask;
+import com.enorkus.popmovies.asynctask.MoviesQueryTask;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.listener.BottomNavigationItemSelectListener;
 import com.enorkus.popmovies.ui.BottomNavigationViewBehavior;
 import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
-import com.enorkus.popmovies.util.MovieAdapter;
+import com.enorkus.popmovies.adapter.MovieAdapter;
 
 import java.util.List;
 
@@ -24,8 +23,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
-//    @BindView(R.id.bottomNavigation)
-//    protected BottomNavigationView bottomNavigation;
     @BindView(R.id.GVmoviePosters)
     protected GridView GVmoviePosters;
 
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        queryTask = new MovieDBQueryTask(this);
+        queryTask = new MoviesQueryTask(this);
         queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -53,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     }
 
     @Override
-    public void getAsyncResponseOnFinish(List<Movie> response) {
-        MovieAdapter adapter = new MovieAdapter(this, response);
+    public void getAsyncResponseOnFinish(List<?> response) {
+        MovieAdapter adapter = new MovieAdapter(this, (List<Movie>) response);
         GVmoviePosters.setAdapter(adapter);
     }
 }

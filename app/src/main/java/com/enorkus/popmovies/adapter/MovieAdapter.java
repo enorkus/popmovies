@@ -1,4 +1,4 @@
-package com.enorkus.popmovies.util;
+package com.enorkus.popmovies.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.listener.PosterOnClickListener;
+import com.enorkus.popmovies.util.ConnectionUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,5 +1,5 @@
 <resources>
     <dimen name="textLarge">25sp</dimen>
-    <dimen name="textSmall">12sp</dimen>
+    <dimen name="textSmall">14sp</dimen>
     <item name="guideline40perc" type="dimen" format="float">0.4</item>
 </resources>

@@ -8,5 +8,5 @@ import java.util.List;
  * Interface for moving AsyncTask output data to an Activity.
  */
 public interface AsyncResponse {
-    void getAsyncResponseOnFinish(List<Movie> response);
+    void getAsyncResponseOnFinish(List<?> response);
 }

@@ -6,13 +6,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.enorkus.popmovies.MovieDBQueryTask;
+import com.enorkus.popmovies.asynctask.MovieDBQueryTask;
 import com.enorkus.popmovies.R;
+import com.enorkus.popmovies.asynctask.MoviesQueryTask;
 import com.enorkus.popmovies.data.MoviesContentProviderHelper;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
-import com.enorkus.popmovies.util.MovieAdapter;
+import com.enorkus.popmovies.adapter.MovieAdapter;
 
 import java.util.List;
 
@@ -38,14 +39,14 @@ public class BottomNavigationItemSelectListener implements BottomNavigationView.
         int id = item.getItemId();
 
         if(id == R.id.menuSortPopular && !isSortedByPopular) {
-            queryTask = new MovieDBQueryTask(this);
+            queryTask = new MoviesQueryTask(this);
             queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
             isSortedByRating = false;
             isSortedByPopular = true;
             isFavoriteMovies = false;
             return true;
         } else if(id == R.id.menuSortRating && !isSortedByRating) {
-            queryTask = new MovieDBQueryTask(this);
+            queryTask = new MoviesQueryTask(this);
             queryTask.execute(ConnectionUtils.buildTopRatedMoviesURL());
             isSortedByRating = true;
             isSortedByPopular = false;
@@ -64,8 +65,8 @@ public class BottomNavigationItemSelectListener implements BottomNavigationView.
     }
 
     @Override
-    public void getAsyncResponseOnFinish(List<Movie> response) {
-        MovieAdapter adapter = new MovieAdapter(ctx, response);
+    public void getAsyncResponseOnFinish(List<?> response) {
+        MovieAdapter adapter = new MovieAdapter(ctx, (List<Movie>) response);
         GVmoviePosters.setAdapter(adapter);
     }
 }

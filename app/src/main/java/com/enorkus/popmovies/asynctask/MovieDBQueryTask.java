@@ -1,8 +1,9 @@
-package com.enorkus.popmovies;
+package com.enorkus.popmovies.asynctask;
 
 import android.os.AsyncTask;
 
 import com.enorkus.popmovies.entity.Movie;
+import com.enorkus.popmovies.entity.Review;
 import com.enorkus.popmovies.util.AsyncResponse;
 import com.enorkus.popmovies.util.ConnectionUtils;
 import com.google.gson.Gson;
@@ -13,10 +14,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MovieDBQueryTask extends AsyncTask<URL, Void, String> {
+public abstract class MovieDBQueryTask extends AsyncTask<URL, Void, String> {
     private final AsyncResponse output;
 
     public MovieDBQueryTask(AsyncResponse output) {
@@ -33,15 +35,7 @@ public class MovieDBQueryTask extends AsyncTask<URL, Void, String> {
         return null;
     }
 
-    protected void onPostExecute(String response) {
-        try {
-            JSONObject results = new JSONObject(response);
-            JSONArray resultsArray = results.getJSONArray("results");
-            Movie[] movieArray = new Gson().fromJson(resultsArray.toString(), Movie[].class);
-            List<Movie> movies = Arrays.asList(movieArray);
-            output.getAsyncResponseOnFinish(movies);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    protected AsyncResponse getOutput() {
+        return output;
     }
 }

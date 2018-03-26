@@ -20,6 +20,9 @@ public class ConnectionUtils {
     private static final String ENDPOINT_VIDEOS = "videos";
     private static final String ENDPOINT_REVIEWS = "reviews";
     private static final String JSON_STREAM_DELIMITER = "\\A";
+    private static final String YOUTUBE_VIDEO_BASE_URL = "https://www.youtube.com/watch?v=";
+    private static final String YOUTUBE_VIDEO_THUMBNAIL_BASE_URL = "https://img.youtube.com/vi";
+    private static final String YOUTUBE_VIDEO_THUMBNAIL_FILE = "hqdefault.jpg";
 
     public static URL buildTopRatedMoviesURL() {
         return buildMoviesDBURL(ENDPOINT_TOP_RATED);
@@ -41,11 +44,24 @@ public class ConnectionUtils {
         return buildMoviesDBURL(id, ENDPOINT_REVIEWS);
     }
 
+    public static String buildYoutubeTrailerURL(String key) {
+        return YOUTUBE_VIDEO_BASE_URL + key;
+    }
+
+    public static String buildYoutubeTrailerThumbnailURL(String key) {
+        Uri uri = Uri.parse(YOUTUBE_VIDEO_THUMBNAIL_BASE_URL).buildUpon()
+                .appendPath(key)
+                .appendPath(YOUTUBE_VIDEO_THUMBNAIL_FILE)
+                .build();
+            return uri.toString();
+    }
+
     private static URL buildMoviesDBURL(String id, String endpoint) {
         Uri uri = Uri.parse(MOVIE_DB_BASE_ULR).buildUpon()
                 .appendPath(id)
                 .appendPath(endpoint)
-                .appendQueryParameter(PARAM_API_KEY, BuildConfig.TheMovieDBAPIKey).build();
+                .appendQueryParameter(PARAM_API_KEY, BuildConfig.TheMovieDBAPIKey)
+                .build();
         try {
             return new URL(uri.toString());
         } catch (MalformedURLException e) {
@@ -57,7 +73,8 @@ public class ConnectionUtils {
     private static URL buildMoviesDBURL(String endpoint) {
         Uri uri = Uri.parse(MOVIE_DB_BASE_ULR).buildUpon()
                 .appendPath(endpoint)
-                .appendQueryParameter(PARAM_API_KEY, BuildConfig.TheMovieDBAPIKey).build();
+                .appendQueryParameter(PARAM_API_KEY, BuildConfig.TheMovieDBAPIKey)
+                .build();
         try {
             return new URL(uri.toString());
         } catch (MalformedURLException e) {
