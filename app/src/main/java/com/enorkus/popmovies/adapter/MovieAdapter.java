@@ -12,15 +12,18 @@ import android.widget.ImageView;
 import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.entity.Movie;
 import com.enorkus.popmovies.listener.PosterOnClickListener;
+import com.enorkus.popmovies.listener.state.MainActivityStateHolder;
 import com.enorkus.popmovies.util.ConnectionUtils;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends ArrayAdapter<Movie> {
 
     public MovieAdapter(@NonNull Context context, @NonNull List<Movie> movies) {
         super(context, 0, movies);
+        MainActivityStateHolder.movies = (ArrayList<Movie>) movies;
     }
 
     @NonNull

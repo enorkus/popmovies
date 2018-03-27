@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ReviewsQueryTask extends MovieDBQueryTask {
             JSONObject results = new JSONObject(response);
             JSONArray resultsArray = results.getJSONArray("results");
             Review[] reviewsArray = new Gson().fromJson(resultsArray.toString(), Review[].class);
-            List<Review> reviews = Arrays.asList(reviewsArray);
+            List<Review> reviews = new ArrayList<>(Arrays.asList(reviewsArray));
             getOutput().getAsyncResponseOnFinish(reviews);
         } catch (
                 JSONException e) {
