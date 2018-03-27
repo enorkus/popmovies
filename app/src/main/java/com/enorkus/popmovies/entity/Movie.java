@@ -1,10 +1,11 @@
 package com.enorkus.popmovies.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
     private int id;
     private String title;
     @SerializedName("release_date")
@@ -23,6 +24,27 @@ public class Movie implements Serializable {
         this.voteAverage = voteAverage;
         this.overview = overview;
     }
+
+    protected Movie(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        releaseDate = in.readString();
+        poster = in.readString();
+        voteAverage = in.readString();
+        overview = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -67,4 +89,19 @@ public class Movie implements Serializable {
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeString(releaseDate);
+        parcel.writeString(poster);
+        parcel.writeString(voteAverage);
+        parcel.writeString(overview);
+    }
 }

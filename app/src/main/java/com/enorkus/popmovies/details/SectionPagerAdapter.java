@@ -25,7 +25,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         switch (position) {
             case 0:
-                bundle.putSerializable("movie", movie);
+                bundle.putParcelable("movie", movie);
                 OverviewFragment overviewFragment = new OverviewFragment();
                 overviewFragment.setArguments(bundle);
                 return overviewFragment;

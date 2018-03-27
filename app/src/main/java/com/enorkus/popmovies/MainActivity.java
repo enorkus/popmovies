@@ -25,8 +25,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @BindView(R.id.GVmoviePosters)
     protected GridView GVmoviePosters;
+    @BindView(R.id.bottomNavigation)
+    protected BottomNavigationView bottomNavigation;
 
     private MovieDBQueryTask queryTask;
+    private List<Movie> currentMovies;
+    private int bottomNavigationSelectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         queryTask = new MoviesQueryTask(this);
         queryTask.execute(ConnectionUtils.buildPopularMoviesURL());
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomNavigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationViewBehavior());
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationItemSelectListener(this, GVmoviePosters));
@@ -51,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     public void getAsyncResponseOnFinish(List<?> response) {
-        MovieAdapter adapter = new MovieAdapter(this, (List<Movie>) response);
+        currentMovies = (List<Movie>)response;
+        MovieAdapter adapter = new MovieAdapter(this, currentMovies);
         GVmoviePosters.setAdapter(adapter);
     }
 }

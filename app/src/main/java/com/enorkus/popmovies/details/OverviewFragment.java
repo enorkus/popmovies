@@ -36,7 +36,7 @@ public class OverviewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
         ButterKnife.bind(this, rootView);
 
-        Movie movie = (Movie) getArguments().getSerializable("movie");
+        Movie movie = (Movie) getArguments().getParcelable("movie");
         TVmovieTitle.setText(movie.getTitle());
         TVreleaseDate.setText(movie.getReleaseDate());
         TVrating.setText(movie.getVoteAverage());

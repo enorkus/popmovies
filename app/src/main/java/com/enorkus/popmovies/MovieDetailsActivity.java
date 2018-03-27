@@ -34,7 +34,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.movieDetailsToolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
-        Movie movie = (Movie) getIntent().getSerializableExtra(EXTRA_MOVIE);
+        Movie movie = (Movie) getIntent().getParcelableExtra(EXTRA_MOVIE);
 
         getSupportActionBar().setTitle(movie.getTitle());
 
