@@ -6,4 +6,6 @@
     <string name="release_date_label">Release date:&#160;</string>
     <string name="rating_label">Rating:&#160;</string>
     <string name="sort_favorite">Favorite</string>
+    <string name="no_reviews">This movie has no reviews yet.</string>
+    <string name="no_videos">This movie has no videos.</string>
 </resources>

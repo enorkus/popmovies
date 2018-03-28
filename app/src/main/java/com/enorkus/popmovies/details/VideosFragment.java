@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.adapter.VideoAdapter;
@@ -25,6 +26,8 @@ public class VideosFragment extends Fragment implements AsyncResponse {
 
     @BindView(R.id.LVvideos)
     protected ListView LVvideos;
+    @BindView(R.id.TVnoMovieVideos)
+    protected TextView TVnoMovieVideos;
 
     @Nullable
     @Override
@@ -41,7 +44,11 @@ public class VideosFragment extends Fragment implements AsyncResponse {
 
     @Override
     public void getAsyncResponseOnFinish(List<?> response) {
-        VideoAdapter adapter = new VideoAdapter(this.getContext(), (List<Video>) response);
-        LVvideos.setAdapter(adapter);
+        if(response != null && !response.isEmpty()) {
+            VideoAdapter adapter = new VideoAdapter(this.getContext(), (List<Video>) response);
+            LVvideos.setAdapter(adapter);
+        } else {
+            TVnoMovieVideos.setVisibility(View.VISIBLE);
+        }
     }
 }

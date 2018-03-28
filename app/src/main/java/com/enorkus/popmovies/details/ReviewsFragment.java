@@ -27,6 +27,8 @@ public class ReviewsFragment extends Fragment implements AsyncResponse {
 
     @BindView(R.id.LVreviews)
     protected ListView LVreviews;
+    @BindView(R.id.TVnoMovieReviews)
+    protected TextView TVnoMovieReviews;
 
     @Nullable
     @Override
@@ -43,8 +45,12 @@ public class ReviewsFragment extends Fragment implements AsyncResponse {
 
     @Override
     public void getAsyncResponseOnFinish(List<?> response) {
-        ReviewAdapter adapter = new ReviewAdapter(this.getContext(), (List<Review>)response);
-        LVreviews.setAdapter(adapter);
+        if(response != null && !response.isEmpty()) {
+            ReviewAdapter adapter = new ReviewAdapter(this.getContext(), (List<Review>)response);
+            LVreviews.setAdapter(adapter);
+        } else {
+            TVnoMovieReviews.setVisibility(View.VISIBLE);
+        }
 
     }
 }
