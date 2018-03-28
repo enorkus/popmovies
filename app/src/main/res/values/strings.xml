@@ -8,4 +8,7 @@
     <string name="sort_favorite">Favorite</string>
     <string name="no_reviews">This movie has no reviews yet.</string>
     <string name="no_videos">This movie has no videos.</string>
+    <string name="header_overview">Overview</string>
+    <string name="header_reviews">Reviews</string>
+    <string name="header_videos">Videos</string>
 </resources>

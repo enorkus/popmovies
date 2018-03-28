@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class MovieDBQueryTask extends AsyncTask<URL, Void, String> {
+    public static final String RESULTS = "results";
     private final AsyncResponse output;
 
     public MovieDBQueryTask(AsyncResponse output) {

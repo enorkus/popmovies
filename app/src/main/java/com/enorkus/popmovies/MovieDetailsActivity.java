@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 public class MovieDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "movie";
+    public static final String EXTRA_MOVIE_ID = "movideID";
 
     @BindView(R.id.IVmoviePoster)
     protected ImageView IVmoviePoster;
@@ -45,7 +46,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 .into(IVmoviePoster);
 
         //Tabs
-        SectionPagerAdapter mSectionsPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), movie);
+        SectionPagerAdapter mSectionsPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), movie, this);
 
         // Set up the ViewPager with the sections adapter.
         ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);

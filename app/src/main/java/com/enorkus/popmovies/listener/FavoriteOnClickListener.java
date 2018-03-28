@@ -28,11 +28,9 @@ public class FavoriteOnClickListener implements View.OnClickListener {
         if(contentHelper.isAlreadyFavoriteMovie(movie.getId())) {
             contentHelper.removeFavoriteMovie(movie.getId());
             fabFavorite.setImageResource(R.drawable.ic_favorite_border_white_48dp);
-            Toast.makeText(view.getContext(), "Successfully removed from favorites", Toast.LENGTH_SHORT).show();
         } else {
             contentHelper.addFavoriteMovie(movie);
             fabFavorite.setImageResource(R.drawable.ic_favorite_white_48dp);
-            Toast.makeText(view.getContext(), "Successfully saved favorited movie", Toast.LENGTH_SHORT).show();
         }
     }
 }

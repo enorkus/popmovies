@@ -11,10 +11,6 @@ public class BottomNavigationViewBehavior extends CoordinatorLayout.Behavior<Bot
 
     private int height;
 
-//    public BottomNavigationViewBehavior(Context ctx, AttributeSet attributeSet) {
-//        super(ctx, attributeSet);
-//    }
-
     @Override
     public boolean onLayoutChild(CoordinatorLayout parent, BottomNavigationView child, int layoutDirection) {
         height = child.getHeight();

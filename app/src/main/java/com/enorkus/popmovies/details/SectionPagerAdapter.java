@@ -1,23 +1,29 @@
 package com.enorkus.popmovies.details;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.enorkus.popmovies.MovieDetailsActivity;
+import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.entity.Movie;
 
 public class SectionPagerAdapter extends FragmentPagerAdapter {
 
     private Movie movie;
+    private Context ctx;
 
     public SectionPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public SectionPagerAdapter(FragmentManager fm, Movie movie) {
+    public SectionPagerAdapter(FragmentManager fm, Movie movie, Context ctx) {
         super(fm);
         this.movie = movie;
+        this.ctx = ctx;
     }
 
     @Override
@@ -25,17 +31,17 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         switch (position) {
             case 0:
-                bundle.putParcelable("movie", movie);
+                bundle.putParcelable(MovieDetailsActivity.EXTRA_MOVIE, movie);
                 OverviewFragment overviewFragment = new OverviewFragment();
                 overviewFragment.setArguments(bundle);
                 return overviewFragment;
             case 1:
-                bundle.putString("movieID", Integer.toString(movie.getId()));
+                bundle.putString(MovieDetailsActivity.EXTRA_MOVIE_ID, Integer.toString(movie.getId()));
                 ReviewsFragment reviewsFragment = new ReviewsFragment();
                 reviewsFragment.setArguments(bundle);
                 return reviewsFragment;
             case 2:
-                bundle.putString("movieID", Integer.toString(movie.getId()));
+                bundle.putString(MovieDetailsActivity.EXTRA_MOVIE_ID, Integer.toString(movie.getId()));
                 VideosFragment videosFragment = new VideosFragment();
                 videosFragment.setArguments(bundle);
                 return videosFragment;
@@ -53,11 +59,11 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Overview";
+                return ctx.getResources().getString(R.string.header_overview);
             case 1:
-                return "Reviews";
+                return ctx.getResources().getString(R.string.header_reviews);
             case 2:
-                return "Videos";
+                return ctx.getResources().getString(R.string.header_videos);
         }
         return null;
     }

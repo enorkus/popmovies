@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.enorkus.popmovies.MovieDetailsActivity;
 import com.enorkus.popmovies.adapter.ReviewAdapter;
 import com.enorkus.popmovies.asynctask.MovieDBQueryTask;
 import com.enorkus.popmovies.R;
@@ -36,7 +37,7 @@ public class ReviewsFragment extends Fragment implements AsyncResponse {
         View rootView = inflater.inflate(R.layout.fragment_reviews, container, false);
         ButterKnife.bind(this, rootView);
 
-        String movieID  = getArguments().getString("movieID");
+        String movieID  = getArguments().getString(MovieDetailsActivity.EXTRA_MOVIE_ID);
         MovieDBQueryTask queryTask = new ReviewsQueryTask(this);
         queryTask.execute(ConnectionUtils.buildMovieReviewsURL(movieID));
 

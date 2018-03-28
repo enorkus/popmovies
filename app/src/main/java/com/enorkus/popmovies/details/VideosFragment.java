@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.enorkus.popmovies.MovieDetailsActivity;
 import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.adapter.VideoAdapter;
 import com.enorkus.popmovies.asynctask.MovieDBQueryTask;
@@ -35,7 +36,7 @@ public class VideosFragment extends Fragment implements AsyncResponse {
         View rootView = inflater.inflate(R.layout.fragment_videos, container, false);
         ButterKnife.bind(this, rootView);
 
-        String movieID  = getArguments().getString("movieID");
+        String movieID  = getArguments().getString(MovieDetailsActivity.EXTRA_MOVIE_ID);
         MovieDBQueryTask queryTask = new VideosQueryTask(this);
         queryTask.execute(ConnectionUtils.buildMovieVideosURL(movieID));
 

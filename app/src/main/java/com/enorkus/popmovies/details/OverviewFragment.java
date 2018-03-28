@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.enorkus.popmovies.MovieDetailsActivity;
 import com.enorkus.popmovies.R;
 import com.enorkus.popmovies.data.MoviesContentProviderHelper;
 import com.enorkus.popmovies.entity.Movie;
@@ -36,7 +37,7 @@ public class OverviewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
         ButterKnife.bind(this, rootView);
 
-        Movie movie = (Movie) getArguments().getParcelable("movie");
+        Movie movie = (Movie) getArguments().getParcelable(MovieDetailsActivity.EXTRA_MOVIE);
         TVmovieTitle.setText(movie.getTitle());
         TVreleaseDate.setText(movie.getReleaseDate());
         TVrating.setText(movie.getVoteAverage());

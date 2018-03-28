@@ -23,7 +23,7 @@ public class VideosQueryTask extends MovieDBQueryTask {
     protected void onPostExecute(String response) {
         try {
             JSONObject results = new JSONObject(response);
-            JSONArray resultsArray = results.getJSONArray("results");
+            JSONArray resultsArray = results.getJSONArray(RESULTS);
             Video[] videosArray = new Gson().fromJson(resultsArray.toString(), Video[].class);
             List<Video> videos = new ArrayList<>(Arrays.asList(videosArray));
             getOutput().getAsyncResponseOnFinish(videos);

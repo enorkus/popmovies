@@ -22,7 +22,7 @@ public class MoviesQueryTask extends MovieDBQueryTask {
     protected void onPostExecute(String response) {
         try {
             JSONObject results = new JSONObject(response);
-            JSONArray resultsArray = results.getJSONArray("results");
+            JSONArray resultsArray = results.getJSONArray(RESULTS);
             Movie[] movieArray = new Gson().fromJson(resultsArray.toString(), Movie[].class);
             List<Movie> movies = new ArrayList<>(Arrays.asList(movieArray));
             getOutput().getAsyncResponseOnFinish(movies);
