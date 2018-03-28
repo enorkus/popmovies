@@ -25,60 +25,35 @@
             app:srcCompat="@drawable/ic_favorite_border_white_48dp" />
 
         <TextView
+            style="@style/TVprimaryLarge"
             android:id="@+id/TVmovieTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/textLarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/IVmoviePoster" />
 
         <TextView
+            style="@style/TVprimarySmall"
             android:id="@+id/TVlabelReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:text="@string/release_date_label"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/textSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TVmovieTitle" />
 
         <TextView
+            style="@style/TVprimarySmall"
             android:id="@+id/TVreleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/textSmall"
             app:layout_constraintStart_toEndOf="@+id/TVlabelReleaseDate"
             app:layout_constraintTop_toBottomOf="@+id/TVmovieTitle" />
 
 
         <TextView
+            style="@style/TVprimarySmall"
             android:id="@+id/TVlabelRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:text="@string/rating_label"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/textSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TVlabelReleaseDate" />
 
         <TextView
+            style="@style/TVprimarySmall"
             android:id="@+id/TVrating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/textSmall"
             app:layout_constraintStart_toEndOf="@+id/TVlabelRating"
             app:layout_constraintTop_toBottomOf="@+id/TVlabelReleaseDate" />
 

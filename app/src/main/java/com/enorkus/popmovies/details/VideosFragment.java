@@ -48,6 +48,7 @@ public class VideosFragment extends Fragment implements AsyncResponse {
         if(response != null && !response.isEmpty()) {
             VideoAdapter adapter = new VideoAdapter(this.getContext(), (List<Video>) response);
             LVvideos.setAdapter(adapter);
+            TVnoMovieVideos.setVisibility(View.GONE);
         } else {
             TVnoMovieVideos.setVisibility(View.VISIBLE);
         }

@@ -49,6 +49,7 @@ public class ReviewsFragment extends Fragment implements AsyncResponse {
         if(response != null && !response.isEmpty()) {
             ReviewAdapter adapter = new ReviewAdapter(this.getContext(), (List<Review>)response);
             LVreviews.setAdapter(adapter);
+            TVnoMovieReviews.setVisibility(View.GONE);
         } else {
             TVnoMovieReviews.setVisibility(View.VISIBLE);
         }
