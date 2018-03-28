@@ -27,6 +27,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.IVmoviePoster)
     protected ImageView IVmoviePoster;
+    @BindView(R.id.fabFavorite)
+    protected FloatingActionButton fabFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,5 +56,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mViewPager);
+
+        fabFavorite.setOnClickListener(new FavoriteOnClickListener(movie, fabFavorite));
+        toggleFavoriteFAB(movie.getId());
+    }
+
+    private void toggleFavoriteFAB(int id) {
+        MoviesContentProviderHelper contentHelper = new MoviesContentProviderHelper(this);
+        if(contentHelper.isAlreadyFavoriteMovie(id)) {
+            fabFavorite.setImageResource(R.drawable.ic_favorite_white_48dp);
+        }
     }
 }

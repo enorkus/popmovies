@@ -28,8 +28,6 @@ public class OverviewFragment extends Fragment {
     protected TextView TVrating;
     @BindView(R.id.TVOverview)
     protected TextView TVoverview;
-    @BindView(R.id.fabFavorite)
-    protected FloatingActionButton fabFavorite;
 
     @Nullable
     @Override
@@ -43,16 +41,6 @@ public class OverviewFragment extends Fragment {
         TVrating.setText(movie.getVoteAverage());
         TVoverview.setText(movie.getOverview());
 
-        fabFavorite.setOnClickListener(new FavoriteOnClickListener(movie, fabFavorite));
-        toggleFavoriteFAB(movie.getId());
-
         return rootView;
-    }
-
-    private void toggleFavoriteFAB(int id) {
-        MoviesContentProviderHelper contentHelper = new MoviesContentProviderHelper(this.getActivity());
-        if(contentHelper.isAlreadyFavoriteMovie(id)) {
-            fabFavorite.setImageResource(R.drawable.ic_favorite_white_48dp);
-        }
     }
 }
