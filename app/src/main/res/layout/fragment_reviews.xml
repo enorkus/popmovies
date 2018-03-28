@@ -16,10 +16,7 @@
         android:listSelector="@android:color/transparent"
         android:nestedScrollingEnabled="true"
         android:paddingBottom="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         style="@style/TVdefaultMessage"
