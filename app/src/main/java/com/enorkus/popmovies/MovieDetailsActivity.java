@@ -24,6 +24,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "movie";
     public static final String EXTRA_MOVIE_ID = "movideID";
+    public static final String EXTRA_REVIEWS = "reviews";
+    public static final String EXTRA_VIDEOS = "videos";
 
     @BindView(R.id.IVmoviePoster)
     protected ImageView IVmoviePoster;
