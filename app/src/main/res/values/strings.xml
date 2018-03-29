@@ -11,4 +11,6 @@
     <string name="header_overview">Overview</string>
     <string name="header_reviews">Reviews</string>
     <string name="header_videos">Videos</string>
+    <string name="check_internet_conection">You seem to be offline. Please check your internet connection.</string>
+    <string name="reload">Reload</string>
 </resources>
